@@ -11,16 +11,20 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Changed scene");
     }
 
+    // Obs. jag lade till LoadScene under varje alternativ för att testa knapparna på android /Karl
     public void Entré ()
     {
         Debug.Log("Entré Selected");
+        SceneManager.LoadScene("Game");
     }
     public void Klassrum()
     {
         Debug.Log("Klassrum Selected");
+        SceneManager.LoadScene("Menu");
     }
     public void Expeditionen()
     {
         Debug.Log("Expeditionen Selected");
+        SceneManager.LoadScene("KarlTestScene");
     }
 }

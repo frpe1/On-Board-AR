@@ -5,12 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/_ONBOARD_/Developer/FredrikP/Scenes/MainScene.unity
-    guid: 9bb977f9f67d6364aa57edd2c1262258
   - enabled: 1
     path: Assets/_ONBOARD_/Developer/Karl/Scenes/KarlTestScene.unity
     guid: 0169957c3dcc2e54e95ffa73a0efaafe
+  - enabled: 1
+    path: Assets/_ONBOARD_/Developer/FredrikS/scene/Menu.unity
+    guid: dc073cf57224562458dbffedb7211613
+  - enabled: 1
+    path: Assets/_ONBOARD_/Developer/FredrikS/scene/Game.unity
+    guid: e821712cda7909d428a3b6ab359ea8cb
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 29ec1d7f1121758499923e17be148b12, type: 2}
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 467da6160e71efc479f61e3f8dd68fad, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: b30add8ebe49c4f4d99cee2beb6d208d, type: 2}
