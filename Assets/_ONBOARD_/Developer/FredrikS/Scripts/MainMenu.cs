@@ -23,4 +23,6 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("Expeditionen Selected");
     }
+
+    
 }
