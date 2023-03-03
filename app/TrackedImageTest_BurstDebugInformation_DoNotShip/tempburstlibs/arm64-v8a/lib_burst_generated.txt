@@ -131,9 +131,9 @@ Library: C:\Unity Projects\On-Board-AR\Temp\StagingArea\tempburstlibs\arm64-v8a\
 --compilation-defines=ENABLE_BURST_1_0_0_OR_NEWER
 --compilation-defines=USING_ANIMATION_MODULE
 --compilation-defines=USING_PHYSICS2D_MODULE
+--compilation-defines=XR_MGMT_GTE_320
 --compilation-defines=TIMELINE_FRAMEACCURATE
 --compilation-defines=UNITY_ANALYTICS
---compilation-defines=XR_MGMT_GTE_320
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=C:\Unity Projects\On-Board-AR\Temp\Burst
 --output=C:\Unity Projects\On-Board-AR\Temp\StagingArea\tempburstlibs\arm64-v8a\lib_burst_generated
