@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/_ONBOARD_/Developer/Karl/Scenes/KarlTestScene.unity
+    path: Assets/_ONBOARD_/Developer/FredrikS/scene/Fredriks kopia.unity
     guid: 0169957c3dcc2e54e95ffa73a0efaafe
   - enabled: 0
     path: Assets/_ONBOARD_/Developer/FredrikS/scene/Menu.unity
