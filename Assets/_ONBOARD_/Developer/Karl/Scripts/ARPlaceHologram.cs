@@ -95,7 +95,7 @@ public class ARPlaceHologram : MonoBehaviour
 
             if (instantiatedObject == null)
             {
-                var instantiatedObject = Instantiate(_prefabToPlace, hit.pose.position, hit.pose.rotation);
+                instantiatedObject = Instantiate(_prefabToPlace, hit.pose.position, hit.pose.rotation);
             }
             else
             {
