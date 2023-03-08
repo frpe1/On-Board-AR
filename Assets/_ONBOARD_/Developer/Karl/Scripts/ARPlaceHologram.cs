@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
+using AugmentedRealityCourse;
 
 public class ARPlaceHologram : MonoBehaviour
 {
     // The prefab to instantiate on touch.
     [SerializeField]
     private GameObject _prefabToPlace;
+
+    private GameObject instantiatedObject;
 
     // Cache ARRaycastManager GameObject from ARCoreSession
     private ARRaycastManager _raycastManager;
@@ -47,6 +50,8 @@ public class ARPlaceHologram : MonoBehaviour
 
             // Debug output what we actually hit
             Debug.Log($"Instantiated on: {Hits[0].hitType}");
+
+         
         }
     }
 
@@ -54,13 +59,22 @@ public class ARPlaceHologram : MonoBehaviour
     {
         ARAnchor anchor;
 
+        if (instantiatedObject == null)
+        {
+            var instantiatedObject = Instantiate(_prefabToPlace, hit.pose.position, hit.pose.rotation);
+        }
+        else
+        {
+            instantiatedObject.transform.position = hit.pose.position;
+        }
+
         if (hit.trackable is ARPlane plane)
         {
 
             // Dessa fyra rader har skrivits i syfte att skapa en anchor punkt PÅ ett
             // plan
             var oldPrefab = _anchorManager.anchorPrefab;
-            _anchorManager.anchorPrefab = _prefabToPlace;
+            _anchorManager.anchorPrefab = instantiatedObject;
             anchor = _anchorManager.AttachAnchor(plane, hit.pose);
             _anchorManager.anchorPrefab = oldPrefab;
                 
@@ -68,13 +82,23 @@ public class ARPlaceHologram : MonoBehaviour
 
         }
         else
-        { 
+        {
             // ... here, we'll place the plane anchoring code!
 
             // Otherwise, just create a regular anchor at the hit pose
 
             // Note: the anchor can be anywhere in the scene hierarchy
-            var instantiatedObject = Instantiate(_prefabToPlace, hit.pose.position, hit.pose.rotation);
+            //var instantiatedObject = Instantiate(_prefabToPlace, hit.pose.position, hit.pose.rotation);
+            /*
+            if (instantiatedObject == null)
+            {
+                var instantiatedObject = Instantiate(_prefabToPlace, hit.pose.position, hit.pose.rotation);
+            } 
+            else
+            {
+                instantiatedObject.transform.position = hit.pose.position;
+            }
+            */
 
             // Make sure the new GameObject has an ARAnchor component
             anchor = instantiatedObject.GetComponent<ARAnchor>();
