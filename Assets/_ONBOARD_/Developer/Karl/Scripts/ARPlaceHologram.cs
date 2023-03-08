@@ -20,6 +20,8 @@ public class ARPlaceHologram : MonoBehaviour
 
     private ARPlaneManager _planeManager;
 
+    private ARAnchor _anchor;
+
     // List for raycast hits is re-used by raycast manager
     private static readonly List<ARRaycastHit> Hits = new List<ARRaycastHit>();
 
@@ -28,7 +30,6 @@ public class ARPlaceHologram : MonoBehaviour
         _raycastManager = GetComponent<ARRaycastManager>();
         _anchorManager = GetComponent<ARAnchorManager>();
         _planeManager = GetComponent<ARPlaneManager>();
-
     }
 
     void Update()
@@ -38,20 +39,22 @@ public class ARPlaceHologram : MonoBehaviour
         if (Input.touchCount < 1 || (touch = Input.GetTouch(0)).phase != TouchPhase.Began) { return; }
 
         // Perform AR raycast to any kind of trackable
-        if (_raycastManager.Raycast(touch.position, Hits, TrackableType.AllTypes))
+        if (_raycastManager.Raycast(touch.position, Hits, TrackableType.FeaturePoint))
         {
             // Raycast hits are sorted by distance, so the first one will be the closest hit.
             Pose hitPose = Hits[0].pose;
 
             // Instantiate the prefab at the given position
             // Note: the object is not anchored yet!
-            //Instantiate(_prefabToPlace, hitPose.position, hitPose.rotation);
-            CreateAnchor(Hits[0]);
-
-            // Debug output what we actually hit
-            // Debug.Log($"Instantiated on: {Hits[0].hitType}");
-
-         
+            if (_anchor == null)
+                _anchor = CreateAnchor(Hits[0]);
+            else
+            {
+                // Detta förflyttar runt kopian, ska senare 
+                // justeras med hjälp av image trackingen (om det behövs)
+                instantiatedObject.transform.position = hitPose.position;
+                instantiatedObject.transform.rotation = hitPose.rotation;
+            }
         }
     }
 
@@ -59,7 +62,10 @@ public class ARPlaceHologram : MonoBehaviour
     {
         ARAnchor anchor;
 
-
+        if (instantiatedObject == null)
+        {
+            instantiatedObject = Instantiate(_prefabToPlace, hit.pose.position, hit.pose.rotation);
+        }
 
         if (hit.trackable is ARPlane plane)
         {
@@ -76,32 +82,6 @@ public class ARPlaceHologram : MonoBehaviour
         }
         else
         {
-            // ... here, we'll place the plane anchoring code!
-
-            // Otherwise, just create a regular anchor at the hit pose
-
-            // Note: the anchor can be anywhere in the scene hierarchy
-            //var instantiatedObject = Instantiate(_prefabToPlace, hit.pose.position, hit.pose.rotation);
-            /*
-            if (instantiatedObject == null)
-            {
-                var instantiatedObject = Instantiate(_prefabToPlace, hit.pose.position, hit.pose.rotation);
-            } 
-            else
-            {
-                instantiatedObject.transform.position = hit.pose.position;
-            }
-            */
-
-            if (instantiatedObject == null)
-            {
-                instantiatedObject = Instantiate(_prefabToPlace, hit.pose.position, hit.pose.rotation);
-            }
-            else
-            {
-                instantiatedObject.transform.position = hit.pose.position;
-            }
-
             // Make sure the new GameObject has an ARAnchor component
             anchor = instantiatedObject.GetComponent<ARAnchor>();
             if (anchor == null)
