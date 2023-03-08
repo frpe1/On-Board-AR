@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
+using AugmentedRealityCourse;
 
 public class ARPlaceHologram : MonoBehaviour
 {
@@ -82,7 +83,7 @@ public class ARPlaceHologram : MonoBehaviour
             {
                 anchor = instantiatedObject.AddComponent<ARAnchor>();
             }
-
+            
             Debug.Log($"Created regular anchor (id: {anchor.nativePtr}).");
         
         }
