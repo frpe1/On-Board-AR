@@ -49,7 +49,7 @@ public class ARPlaceHologram : MonoBehaviour
             CreateAnchor(Hits[0]);
 
             // Debug output what we actually hit
-            Debug.Log($"Instantiated on: {Hits[0].hitType}");
+            // Debug.Log($"Instantiated on: {Hits[0].hitType}");
 
          
         }
@@ -59,14 +59,7 @@ public class ARPlaceHologram : MonoBehaviour
     {
         ARAnchor anchor;
 
-        if (instantiatedObject == null)
-        {
-            var instantiatedObject = Instantiate(_prefabToPlace, hit.pose.position, hit.pose.rotation);
-        }
-        else
-        {
-            instantiatedObject.transform.position = hit.pose.position;
-        }
+
 
         if (hit.trackable is ARPlane plane)
         {
@@ -78,7 +71,7 @@ public class ARPlaceHologram : MonoBehaviour
             anchor = _anchorManager.AttachAnchor(plane, hit.pose);
             _anchorManager.anchorPrefab = oldPrefab;
                 
-            Debug.Log($"Created anchor attachment for plane (id: {anchor.nativePtr}).");
+            DebugManager.Instance.AddDebugMessage($"A  (id: {anchor.nativePtr}).");
 
         }
         else
@@ -100,6 +93,15 @@ public class ARPlaceHologram : MonoBehaviour
             }
             */
 
+            if (instantiatedObject == null)
+            {
+                var instantiatedObject = Instantiate(_prefabToPlace, hit.pose.position, hit.pose.rotation);
+            }
+            else
+            {
+                instantiatedObject.transform.position = hit.pose.position;
+            }
+
             // Make sure the new GameObject has an ARAnchor component
             anchor = instantiatedObject.GetComponent<ARAnchor>();
             if (anchor == null)
@@ -107,7 +109,7 @@ public class ARPlaceHologram : MonoBehaviour
                 anchor = instantiatedObject.AddComponent<ARAnchor>();
             }
 
-            Debug.Log($"Created regular anchor (id: {anchor.nativePtr}).");
+            DebugManager.Instance.AddDebugMessage($"B (id: {anchor.nativePtr}).");
         
         }
 
