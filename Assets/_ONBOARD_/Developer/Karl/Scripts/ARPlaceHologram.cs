@@ -48,13 +48,16 @@ public class ARPlaceHologram : MonoBehaviour
             // Note: the object is not anchored yet!
             if (_anchor == null)
                 _anchor = CreateAnchor(Hits[0]);
+            /*
             else
+            
             {
                 // Detta förflyttar runt kopian, ska senare 
                 // justeras med hjälp av image trackingen (om det behövs)
                 instantiatedObject.transform.position = hitPose.position;
                 instantiatedObject.transform.rotation = hitPose.rotation;
             }
+            */
         }
     }
 
